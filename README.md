@@ -1,6 +1,5 @@
 # Search Engine Credit User Flask MySQL
 
-![Search Engine Logo](images/image1.png)
 
 Welcome to our Search Engine Credit User Flask MySQL project! This application is built using Flask and MySQL to manage user credits and provide efficient search functionality.
 
@@ -18,8 +17,9 @@ Welcome to our Search Engine Credit User Flask MySQL project! This application i
 1. **Clone the repository:**
 
    ```bash
-   git clone https://github.com/your-username/search-engine-flask-mysql.git
-   cd search-engine-flask-mysql
+   git clone https://github.com/AftabHussainShar/search-engine-credit-user-flask-mysql
+.git
+   cd search-engine-credit-user-flask-mysql
    ```
 
 2. **Install dependencies:**
