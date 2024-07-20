@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Import Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style_import.css') }}">
+
+    <style>
+    </style>
+</head>
+<body>
+    <a href="/logout" style="display: inline-block; margin-top: 20px; text-align: center; padding: 8px 12px; background: #28a745; color: #fff; border: none; border-radius: 3px; font-size: 14px; cursor: pointer; text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">Logout</a>
+
+    <div class="container">
+        <h1>Import Data from Excel</h1>
+        <form action="/import" method="post" enctype="multipart/form-data">
+            <label for="file">Select Excel file (.xlsx):</label>
+            <input type="file" id="file" name="file">
+            <input type="hidden" id="table_name" value="contacts" name="table_name">
+            <label for="password">Enter Password:</label>
+            <input type="password" id="password" name="password" required><br><br>
+            <input type="submit" value="Import">
+        </form>
+    </div>
+</body>
+</html>

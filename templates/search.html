@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Data</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+    
+    </style>
+</head>
+<body>
+    <a href="/logout" style="display: inline-block; margin-top: 20px; text-align: center; padding: 8px 12px; background: #28a745; color: #fff; border: none; border-radius: 3px; font-size: 14px; cursor: pointer; text-decoration: none; transition: background 0.3s;" onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">Logout</a>
+    <div class="container">
+        <h1>Search Data</h1>
+        <h3>Remaining Credits {{current_credit}}</h3>
+        <form action="/search" method="post" class="search-form">
+            <div class="row">
+                <div class="col-3">
+                    <label for="id">ID:</label>
+                    <input type="text" id="query" name="id" class="search-input" required>
+                </div>
+                <div class="col-3">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" name="firstname" class="search-input" required>
+                </div>
+                <div class="col-3">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" name="lastname" class="search-input" required>
+                </div>
+                <div class="col-3">
+                    <label for="type_">Type:</label>
+                    <input type="text" id="type_" name="type_" class="search-input" required>
+                </div>
+                <div class="col-3">
+                    <label for="dob">Date of Birth:</label>
+                    <input type="date" id="dob" name="dob" class="search-input" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <input type="submit" value="Search" class="search-button">
+                </div>
+            </div>
+        </form>
+        {% if results %}
+            <h2>Search Results:</h2>
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Date of Birth</th>
+                        <th>Result</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for result in results %}
+                        <tr>
+                            <td>{{ result['ID'] }}</td>
+                            <td>{{ result['firstname'] }}</td>
+                            <td>{{ result['lastname'] }}</td>
+                            <td>{{ result['dob'] }}</td>
+                            <td>{{ result['result'] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No results found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

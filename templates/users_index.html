@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Credit Management</title>
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th, td {
+            padding: 10px;
+        }
+        th {
+            background-color: #28a745;
+        }
+        .form-container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .form-container label {
+            font-weight: bold;
+        }
+        .form-container input {
+            margin-top: 5px;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .form-container button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        td button {
+            padding: 8px 12px;
+            background-color: #dc3545;
+            border: none;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        /* Additional custom styling */
+        .credit-modal .modal-dialog {
+            max-width: 400px;
+        }
+
+        .add-user-link, .home-link {
+            display: inline-block;
+            margin-top: 20px;
+            text-align: center;
+            padding: 8px 12px;
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .add-user-link:hover, .home-link:hover {
+            background: #218838;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style= "text-align: center;">User Credit Management</h2>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Credit</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.credit }}</td>
+                    <td>
+                        <button style= "background: green;" onclick="manageCredit({{ user.id }}, 'add')">Add Credit</button>
+                        <button onclick="manageCredit({{ user.id }}, 'subtract')">Subtract Credit</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            
+        </table>
+        <a href="{{ url_for('home') }}" class="home-link">Home</a>
+        <div id="creditFormContainer" class="form-container" style="display: none;">
+            <h3 id="formTitle">Manage User Credit</h3>
+            <form id="creditForm">
+                <div class="form-group">
+                    <label for="userId">User ID:</label>
+                    <input type="text" id="userId" name="userId" readonly>
+                </div>
+                <div class="form-group">
+                    <label for="creditChange">Credit Change:</label>
+                    <input type="number" id="creditChange" name="creditChange" required>
+                </div>
+                <div class="form-group">
+                    <button type="submit" id="submitButton">Update Credit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function manageCredit(userId, action) {
+            document.getElementById('userId').value = userId;
+            if (action === 'add') {
+                document.getElementById('formTitle').textContent = 'Add Credit';
+                document.getElementById('submitButton').textContent = 'Add Credit';
+            } else if (action === 'subtract') {
+                document.getElementById('formTitle').textContent = 'Subtract Credit';
+                document.getElementById('submitButton').textContent = 'Subtract Credit';
+            }
+            document.getElementById('creditFormContainer').style.display = 'block';
+        }
+
+        document.getElementById('creditForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            let userId = document.getElementById('userId').value;
+            let creditChange = parseInt(document.getElementById('creditChange').value);
+
+            if (isNaN(creditChange)) {
+                alert('Please enter a valid number for credit change.');
+                return;
+            }
+
+            if (creditChange === 0) {
+                alert('Credit change must not be zero.');
+                return;
+            }
+
+            let action = document.getElementById('submitButton').textContent.includes('Add') ? 'add' : 'subtract';
+
+            // Adjust creditChange based on the action (add or subtract)
+            if (action === 'subtract') {
+                creditChange = -creditChange; // Change creditChange to negative for subtraction
+            }
+
+            fetch('/users_credit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ userId: userId, creditChange: creditChange })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Credit update successful!');
+                console.log(data); // Logging the response from the server
+                // You can update UI or handle further actions based on the response
+                location.reload(); // Refresh the page after successful update
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error occurred while processing the request');
+            });
+        });
+    </script>
+</body>
+</html>

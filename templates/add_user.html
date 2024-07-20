@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add User</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #28a745; /* Blue color for headings */
+            text-align: center; /* Center align the heading */
+        }
+
+        form {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #28a745; /* Blue color for labels */
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        input[type="checkbox"] {
+            margin-top: 10px;
+        }
+
+        
+        a,button {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            padding: 8px 12px;
+            background: #28a745; /* Green background for link */
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center; /* Center align the heading */
+            transition: background 0.3s;
+        }
+
+        a:hover,button:hover {
+            background: #218838; /* Darker green on hover */
+        }
+        /* Style for the switch-like checkbox */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 40px;
+            height: 20px;
+            margin-top: 10px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px;
+            width: 14px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #007bff; /* Blue background when checked */
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(20px); /* Move the knob to the right when checked */
+        }
+
+        /* Rounded sliders */
+        .slider.round {
+            border-radius: 20px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+        
+
+    </style>
+</head>
+<body>
+    <h1>Add User</h1>
+    
+    <form action="{{ url_for('add_user') }}" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br><br>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br><br>
+        
+        <label for="role">Role:</label>
+        <select id="role" name="role">
+            <option value="admin">Admin</option>
+            <option value="user" selected>User</option>
+        </select><br><br>
+        
+        <label for="status">Status:</label>
+        <label class="switch">
+            <input type="checkbox" id="status" name="status" value="1">
+            <span class="slider round"></span>
+        </label>
+        
+        <button type="submit">Add User</button>
+        <a href="{{ url_for('users') }}">Back to Users</a>
+    </form>
+    
+    
+</body>
+</html>
