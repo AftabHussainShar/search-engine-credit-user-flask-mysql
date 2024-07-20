@@ -1,7 +1,3 @@
-Certainly! Here's a sample README file for your Flask MySQL search engine project, including instructions on how to use and set it up, along with images:
-
----
-
 # Search Engine Credit User Flask MySQL
 
 ![Search Engine Logo](images/image1.png)
@@ -48,12 +44,12 @@ Welcome to our Search Engine Credit User Flask MySQL project! This application i
 
 ## Screenshots
 
-![Screenshot 1](images/image1.png)
-![Screenshot 2](images/image2.png)
-![Screenshot 3](images/image3.png)
-![Screenshot 4](images/image4.png)
-![Screenshot 5](images/image5.png)
-![Screenshot 6](images/image6.png)
+![Screenshot 1](images/image (1).png)
+![Screenshot 2](images/image (2).png)
+![Screenshot 3](images/image (3).png)
+![Screenshot 4](images/image (4).png)
+![Screenshot 5](images/image (5).png)
+![Screenshot 6](images/image (6).png)
 
 ## Contributing
 
