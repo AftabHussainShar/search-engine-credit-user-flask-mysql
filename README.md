@@ -44,12 +44,13 @@ Welcome to our Search Engine Credit User Flask MySQL project! This application i
 
 ## Screenshots
 
-![Screenshot 1](./images/image (1).png)
-![Screenshot 2](./images/image (2).png)
-![Screenshot 3](./images/image (3).png)
-![Screenshot 4](./images/image (4).png)
-![Screenshot 5](./images/image (5).png)
-![Screenshot 6](./images/image (6).png)
+![Screenshot 1](./images/image%20(1).png)
+![Screenshot 2](./images/image%20(2).png)
+![Screenshot 3](./images/image%20(3).png)
+![Screenshot 4](./images/image%20(4).png)
+![Screenshot 5](./images/image%20(5).png)
+![Screenshot 6](./images/image%20(6).png)
+
 
 ## Contributing
 
